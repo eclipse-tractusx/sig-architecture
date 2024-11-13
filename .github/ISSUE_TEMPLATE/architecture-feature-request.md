@@ -125,9 +125,9 @@ explain briefly the research methods, and draw attention to patterns, clusters, 
 
 ## Acceptance Criteria
 
--[] criteria 1
--[] criteria 2
--[] criteria 3
+- [ ] criteria 1
+- [ ] criteria 2
+- [ ] criteria 3
 
 
 
