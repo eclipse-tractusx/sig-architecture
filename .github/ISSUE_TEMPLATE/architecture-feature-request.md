@@ -36,7 +36,9 @@ This ADR template emphasizes creating a business case for a decision, including 
 
 ## Evaluation criteria 
 
+<!--
 Summary: explain briefly what we seek to discover and why;
+-->
 
 # Candidates to consider (Low-level deep dive)
 
