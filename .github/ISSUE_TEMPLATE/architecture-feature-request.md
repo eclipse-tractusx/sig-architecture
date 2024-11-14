@@ -91,11 +91,13 @@ Example:
 -->
 
 
-## 6 Additional Notes
+## 7. Additional Notes
+
 
 <!-- Include here your opinion, any other notes or thoughts that would help the reader and are relevant -->
 
-## 7. Acceptance Criteria
+## 8. Acceptance Criteria
+
 
 - [ ] criteria 1
 - [ ] criteria 2
