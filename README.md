@@ -10,8 +10,8 @@ This is the Special Interest Group for Architecture (sig-architecture) within th
 - Document the architecture and how all the products come together as a whole
 - Document the design decisions of the project itself, regarding other dataspaces and organizations.
 - Document the relationships in between products, aligning and keep things running in between the dependencies
-- Enable a fluid and syncronized integration of the Tractus-X Dataspace, having a big picture how it comes together.
-- Easy the understanding for external technical viewers that want to learn how Tractus-X architecture works.
+- Enable a fluid and synchronized integration of the Tractus-X Dataspace, having a big picture how it comes together.
+- Easy the understanding for external technical viewers who want to learn how Tractus-X has been built from architectural point of view.
 
 ## How to Get Involved
 
