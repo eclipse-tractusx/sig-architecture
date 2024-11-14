@@ -10,17 +10,18 @@ labels: 'architecture'
 
 # [Feature Title]
 
-|||
-|-|-|
-| **Status** | <!-- Accepted, Rejected, In Progress, In Review, Published, Deprecated --> |
+|**Status**|
+|-|
+| Draft <!-- Accepted, Rejected, In Progress, In Review, Published, Deprecated --> |
 
-|||
-|-|-|
-| **Category** | <!-- Sustainability, Dataspace Operation, Dataspace Interoperability, Compliance, etc... --> |
 
-|||
-|-|-|
-| **Dependencies** | <!-- Which applications, expert groups, organizations does this feature impact -->|
+|**Category**|
+|-|
+|<!-- Sustainability, Dataspace Operation, Dataspace Interoperability, Compliance, etc... --> |
+
+|**Dependencies**|
+|-|
+|<!-- Which applications, expert groups, organizations does this feature impact -->|
 
 ## 1.  Context
 
