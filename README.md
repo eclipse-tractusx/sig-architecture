@@ -15,22 +15,30 @@ This is the Special Interest Group for Architecture (sig-architecture) within th
 
 ## How to Get Involved
 
-- **Get onboarded**: [Getting started](https://eclipse-tractusx.github.io/docs/oss/getting-started/)
+- **Get onboarded**: [Getting started](https://eclipse-tractusx.github.io/docs/oss/getting-started/). Join the Eclipse Tractus-X open source community as a contributor!
+- Use your official [Architecture Feature Request](./.github/ISSUE_TEMPLATE/architecture-feature-request.md) template to document your business case, issue or enhacement. 
+- Attend the [official community office hours](https://eclipse-tractusx.github.io/community/open-meetings/#Community%20Office%20Hour) and raise your issue!
+
 
 ## Direct Involvement for Specific Security Topics
+
+### Do you want to propose a design decision?
+
+🚀 You can also use our official [Architecture Feature Request](./.github/ISSUE_TEMPLATE/architecture-feature-request.md) and please detail as most as possible your feature, so you can help us understand it to decide on it.
+
+### Found a bug?
+
+👀 If you have identified a bug or want to fix an existing documentation, feel free to create a new issue at our project's corresponding [GitHub Issues page](https://github.com/eclipse-tractusx/sig-architecture/issues/new/choose)
+
+ ⁉️ Before doing so, please consider searching for potentially suitable [existing issues](https://github.com/eclipse-tractusx/sig-architecture/issues).
+
+
+🙋 **Assign to yourself** - Show others that you are working on this issue by assigning it to yourself.
+<br>To do so, click the cog wheel next to the Assignees section just to the right of this issue.
 
 ### Discuss
 📣 If you want to share an idea to further enhance the project, please feel free to contribute to the [discussions](https://github.com/eclipse-tractusx/sig-architecture/discussions),
 otherwise [create a new discussion](https://github.com/eclipse-tractusx/sig-architecture/discussions/new/choose)
-
-### Create an Issue
-
-👀 If you have identified a bug or want to formulate a design decision for your business case or working item, feel free to create a new issue at our project's corresponding [GitHub Issues page](https://github.com/eclipse-tractusx/sig-architecture/issues/new/choose)
-
- ⁉️ Before doing so, please consider searching for potentially suitable [existing issues](https://github.com/eclipse-tractusx/sig-architecture/issues).
-
-🙋 **Assign to yourself** - Show others that you are working on this issue by assigning it to yourself.
-<br>To do so, click the cog wheel next to the Assignees section just to the right of this issue.
 
 ## Reporting a Security Issue
 
