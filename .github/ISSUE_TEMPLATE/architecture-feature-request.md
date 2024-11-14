@@ -19,6 +19,7 @@ This ADR template emphasizes creating a business case for a decision, including 
 
 ## Top-level
 
+<!--
 * Title
 * Status
 * Evaluation criteria
@@ -30,6 +31,7 @@ This ADR template emphasizes creating a business case for a decision, including 
   * Opinions and feedback
 * Recommendation
 * Acceptance Criteria
+-->
  
 
 ## Evaluation criteria 
