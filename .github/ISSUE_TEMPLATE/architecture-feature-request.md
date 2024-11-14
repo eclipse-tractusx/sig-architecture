@@ -6,134 +6,96 @@ labels: 'architecture'
 
 ---
 
-# Feature proposal for architecture decision
+<!-- Feature proposal for architecture decision -->
 
-This ADR template emphasizes creating a business case for a decision, including critera, candidates, and costs.
+# [Feature Title]
 
-|  | Value |  Description | 
-|:--| ----- |:--- |  
-| **Title** |  | A short present tense imperative phrase, less than 50 characters, like a git commit message. | 
-| **Status** |  |  One of proposed, accepted, rejected, deprecated, superseded, etc |
-| **Depencencies** | | Which applications, expert groups, organizations does this feature impact |
+|||
+|-|-|
+| **Status** | <!-- Accepted, Rejected, In Progress, In Review, Published, Deprecated --> |
+
+|||
+|-|-|
+| **Category** | <!-- Sustainability, Dataspace Operation, Dataspace Interoperability, Compliance, etc... --> |
+
+|||
+|-|-|
+| **Dependencies** | <!-- Which applications, expert groups, organizations does this feature impact -->|
 
 
-## Top-level
+## 1.  Context
 
-<!--
-* Title
-* Status
-* Evaluation criteria
-* Candidates to consider
-* Research and analysis of each candidate
-  * Does/doesn't meet criteria and why
-  * Cost analysis
-  * SWOT analysis
-  * Opinions and feedback
-* Recommendation
-* Acceptance Criteria
--->
- 
+<!-- 
+Describe here your motivations and the reason why you are requesting this feature.
+Which requirements do you have and from where do the come from.
 
-## Evaluation criteria 
-
-<!--
-Summary: explain briefly what we seek to discover and why;
 -->
 
-# Candidates to consider (Low-level deep dive)
+## 2. Business Case
 
-<!--
-Summary: explain briefly how we discovered candidates, and draw attention to any outliers. 
+<!-- 
+Describe here the business case behind your feature, why is it interesting for the dataspace overall.
+-->
 
-List all candidates and related options; what are we evaluating as potential solutions?;  
+## 3. Motivation
+
+<!-- 
+Describe here your motivation for the feature, it should show the problem and why we want to solve it.
+-->
+
+## 4. Solution Candidates
+
+| Candidate | Short Summary |
+|-|:-|
+| <!-- Cadidate title --> | <!-- Candidate short descrption details --> | 
+
+
+## 5. Candidates Deep Dive
+
+### 5.1. Candidate 1  
+
+<!-- 
+Include the description of the candidate and what is your vision.
+-->
+
+#### 5.1.1. Strengths
+
+<!-- Advantages for implementing this feature, what would be the benefits for the dataspace -->
+
+#### 5.1.2. Weeknesses
+
+<!-- Technical debt, possible problems, drawbacks, issues -->
+
+#### 5.1.3. Impact
+
+<!-- What is the impact of your feature in the dataspace. -->
+
+#### 5.1.4. Remediations
+
+<!-- How can your solution remediate the impact -->
+
+#### 5.1.5. Technical Solution Diagrams
+
+<!-- Represent your solution in diagrams to ease the understanding of the reader -->
+
+
+## 6. Releated Features/Design Decisions
+
+<!-- 
+List here the related features and design decisions.
+
+Example:
+- #123
+- ...
+
 -->
 
 
-## Research and analysis of each candidate
+## 6 Additional Notes
 
-<!--
-Explain briefly the research methods, and draw attention to patterns, clusters, and outliers.
--->
+<!-- Include here your opinion, any other notes or thoughts that would help the reader and are relevant -->
 
-### Does/doesn't meet criteria and why
-
-### Cost analysis
-
-<!--
-Provide information about cost / benefit tradeoffs you considered.
-
-* Examples
-    * Licensing, such as contract agreements and legal commitments
-    * Training, such as upskilling and change management
-    * Operating, such as support and maintenance
-    * Metering, such as bandwidth and CPU usage
--->
-
-
-### SWOT analysis
-
-<!--
-Provide a SWOT analysis you did for your ADR
-* Strengths
-* Weaknesses
-* Opportunites
-* Threats
--->
-
-### Internal opinions and feedback
-
-<!--
-With whom (stakeholders) did you discuss the ADR and received which feedback. Are points remaining open?
-
-* Examples
-    * By the team, ideally written by the actual person
-    * From other stakeholders
-    * Quality attributes a.k.a. cross-functional requirements 
--->
-
-### External opinions and feedback
-
-<!--
-Same as above but from outside Eclipse Tractus-X
--->
-
-## What are other candidates you considered?
-
-## What are you creating? 
-
-<!--
-What kind of application are you working on that drives the ADR? Does it influence others?
-
-Examples
-
-* B2B or B2C
-* external-facing or employee-only
-* desktop or mobile
-* pilot or production
-* monolith or microservices
--->
-
-## How did you evaluate the candidates?
-
-## Why did you choose the winner?
-
-## What is happening since then?
-
-<!--
-Please note down how you validated the ADR since the change.
-
-    * Examples
-    * How is the winner performing?
-    * What % of real-world production user traffic is flowing through the winner?
-    * What kinds of integrations are involved, such as with continuous delivery pipelines, content management systems, analytics and metrics, etc.?
-    * Knowing what you know now, what would you advise people to do differently?
--->
-
-### Anecdotes
-
-## Recommendation
-
-## Acceptance Criteria
+## 7. Acceptance Criteria
 
 - [ ] criteria 1
 - [ ] criteria 2
