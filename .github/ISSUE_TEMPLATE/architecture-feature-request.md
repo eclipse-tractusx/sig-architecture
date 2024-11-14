@@ -1,6 +1,6 @@
 ---
 name: Architecture Feature Request
-about: Request for an architecture feature for a bussiness case
+about: Request for an architecture feature for a business case
 title: "[Architecture Decision Feature] YOUR_ISSUE_TITLE_HERE"
 labels: 'architecture'
 
@@ -22,13 +22,11 @@ labels: 'architecture'
 |-|-|
 | **Dependencies** | <!-- Which applications, expert groups, organizations does this feature impact -->|
 
-
 ## 1.  Context
 
 <!-- 
 Describe here your motivations and the reason why you are requesting this feature.
 Which requirements do you have and from where do the come from.
-
 -->
 
 ## 2. Business Case
@@ -47,7 +45,7 @@ Describe here your motivation for the feature, it should show the problem and wh
 
 | Candidate | Short Summary |
 |-|:-|
-| <!-- Cadidate title --> | <!-- Candidate short descrption details --> | 
+| <!-- Candidate title --> | <!-- Candidate short description details --> | 
 
 
 ## 5. Candidates Deep Dive
@@ -62,7 +60,7 @@ Include the description of the candidate and what is your vision.
 
 <!-- Advantages for implementing this feature, what would be the benefits for the dataspace -->
 
-#### 5.1.2. Weeknesses
+#### 5.1.2. Weaknesses
 
 <!-- Technical debt, possible problems, drawbacks, issues -->
 
@@ -70,7 +68,7 @@ Include the description of the candidate and what is your vision.
 
 <!-- What is the impact of your feature in the dataspace. -->
 
-#### 5.1.4. Remediations
+#### 5.1.4. Remediation
 
 <!-- How can your solution remediate the impact -->
 
@@ -79,7 +77,7 @@ Include the description of the candidate and what is your vision.
 <!-- Represent your solution in diagrams to ease the understanding of the reader -->
 
 
-## 6. Releated Features/Design Decisions
+## 6. Related Features/Design Decisions
 
 <!-- 
 List here the related features and design decisions.
@@ -90,16 +88,12 @@ Example:
 
 -->
 
-
 ## 7. Additional Notes
-
 
 <!-- Include here your opinion, any other notes or thoughts that would help the reader and are relevant -->
 
 ## 8. Acceptance Criteria
 
-
 - [ ] criteria 1
 - [ ] criteria 2
 - [ ] criteria 3
-
