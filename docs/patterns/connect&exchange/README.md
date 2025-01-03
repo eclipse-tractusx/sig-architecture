@@ -203,7 +203,7 @@ Applications like the:
 - Simple Data Exchanger (needs to be refactored, or better recreated with a new name and purpose)
 - Demand and Capacity Management
   
-+ All the applications that use multiple assets in the EDC but do not need to renegotiate the terms when talking with the same asset.
++ All applications that use the same asset, e.g. a DTR, in multiple requests over a longer period of time.
 
 ## 4. Advantages
 
