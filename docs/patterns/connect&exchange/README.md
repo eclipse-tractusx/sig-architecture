@@ -3,7 +3,7 @@
 
 Tractus-X - Special Interest Group (SIG) Architecture
 
-Copyright (c) 2024 Contributors to the Eclipse Foundation
+Copyright (c) 2024, 2025 Contributors to the Eclipse Foundation
 
 See the NOTICE file(s) distributed with this work for additional
 information regarding copyright ownership.
@@ -254,5 +254,5 @@ Applications like the:
 This work is licensed under the [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/legalcode).
 
 - SPDX-License-Identifier: CC-BY-4.0
-- SPDX-FileCopyrightText: 2024 Contributors to the Eclipse Foundation
+- SPDX-FileCopyrightText: 2024, 2025 Contributors to the Eclipse Foundation
 - Source URL: https://github.com/eclipse-tractusx/digital-product-pass
