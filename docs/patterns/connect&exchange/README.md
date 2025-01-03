@@ -4,6 +4,10 @@
 |-|
 | Draft |
 
+|**Version**|
+|-|
+| v0.1 |
+
 |**Type**|
 |-|
 | Usage Pattern |
@@ -182,18 +186,7 @@ Applications like the:
 - Would require the development of a new "Simple Data Exchanger" application, maybe a "Kickstart KIT" ??
     - Or maybe it can be an EDC extension 
 
-
-## 6. Tasks
-
-- [ ] Define the draft concept in a branch and open a pull request.
-    - Detail the implementation enablements, which is required, providing examples
-    - Detail the architecture layer of Tractus-X
-    - Review the visibility of the pattern with the committers & architects.
-    - Mention this pattern in the feature that is being worked: https://github.com/eclipse-tractusx/sig-release/issues/924
- - [ ] Raise Awareness for the users/applications of the Tractus-X dataspace
- - [ ] Propose a Kickstart KIT, or similar reference implementation.
-
-## 7. Disclaimers
+## 6. Disclaimers
 
 - It was supposed that all the EDC systems are working and deployed in Internet at a working Catena-X/Tractus-X environment, with all their identities being already validated.
 - Some aspects from the DSP protocol were abstracted to reduce the complexity of the diagrams.
@@ -204,4 +197,6 @@ Applications like the:
 - The frequency of the cache "dump" is up to the consumer to decide.
 - The way on how to find the "edc" connector is not specified, it is at least required to start the EDR negotiation, for retrieving the data.
 - The way of finding the partner you want to connect with was not specified, leaving open the possibility of abstracting this functionality in the future. BPN -> DID -> EDC -> Federated Catalog
+
+
 
