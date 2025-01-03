@@ -1,7 +1,7 @@
 <!--
 #######################################################################
 
-Tractus-X - SIG Architecture
+Tractus-X - Special Interest Group (SIG) Architecture
 
 Copyright (c) 2024 Contributors to the Eclipse Foundation
 
