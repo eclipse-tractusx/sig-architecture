@@ -1,0 +1,207 @@
+# Connect & Exchange Dataspace Usage Pattern
+
+|**Status**|
+|-|
+| Draft |
+
+|**Type**|
+|-|
+| Usage Pattern |
+
+|**Category**|
+|-|
+| Dataspace Adoption |
+
+|**Objective**|
+|-|
+| Reduce complexity, Increase Performance |
+
+|**Dependencies/Target Group**|
+|-|
+| Eclipse Dataspace Connector, Any Tractus-X Consumer Application (DPP, DCM, IRS, PURIS, etc) |
+
+## 1.  Context
+
+This data space usage pattern comes from the idea of:
+
+> You don't need to understand the HTTP protocol to use the internet as an application
+
+The same applies to:
+
+> You don't need to understand the DSP protocol to use the Tractus-X network as an application
+
+Now a days there is a big overhead at the "Application" layer from Tractus-X. Every application is using the Eclipse Dataspace Connector (EDC) in their own way. In case of Tractus-X we are using the [Tractus-X EDC](https://github.com/eclipse-tractusx/tractusx-edc).  The problem is that there is no harmonization in between the consumer and provider applications how they can in the most optimized way, and specially in a "fast" way retrieve data from the network. 
+They first need to understand how the complete protocol and EDC works to finally adopt the network.
+
+Therefore there was built the "EDR" (Endpoint Data Reference) Interface. It was built for simplifying the negotiation and transfer process for the application. Now it is stable since the Jupiter release from Catena-X (TX-EDC >v0.7.5) and is available out there, however there is no usage pattern yet provider for the application side.
+
+Another point is, the EDC still needs to be optimized and several breaking changes are being planned for the future, and therefore all the applications will need to change their way they use the EDC.
+
+For example: If in the future we want to move to the "bring your own identity approach" where everyone brings their DID we need then to expect the applications will care about this.
+And that is a huge amount of work for applications to be adapting every release to the latest "base" data space components.
+
+Therefore this pattern aims to reduce the complexity on the Application layer, easing the adoption of the dataspace for any application using the EDC.
+
+In the end from the application side there is only two things that matter when consuming information:
+
+- Which is the "Dataplane URL"
+- Which authorization token I need.
+
+The rest can be abstracted, and this is going to be defined here in this usage pattern which could be implemented in a reference implementation or at any application if followed correctly.
+
+![Connect and Exchange Pattern Simple](./media/connect&exchange-context.svg)
+
+Right now the thing that is happening is that the connections are open and they are not used. The Eclipse Dataspace Connector was not designed to keep so many connections open, for every asset we want to retrieve a new connection is open, and just one data exchange is done, and then the connection keeps open. And the applications are not aweare of that.
+
+## 2. The pattern
+
+**Architecture Design Patterns Used**: Adapter + Proxy
+
+### 2.1 Name
+
+# Connect & Exchange
+
+*Name Description*: It is so simple to use Tractus-X, you don't need to understand how the policy agreement works, just send your conditions and the application you want to talk with, connect, and exchange data then until any condition changes (detailed below in 2.3.2 [Step 5]).
+
+>**Note**: Alternative names can be still discussed
+
+### 2.2 Description
+
+Often people don't really understand the sense of the Eclipse Dataspace Connector, in the end it is a "Infrastructure Enabler", it enables the infrastructure at your company, so information can be accessed, and what the EDC does is to set a "security layer" over the data endpoints.
+
+But in the end you will ALWAYS have applications or services behind the EDC which will respond with information or confirm that the operation was executed.
+
+The only thing that it creates is a "PIPE" in between the companies and the connection remains open. 
+
+Using the EDR interface applications are able to negotiate assets from the catalog without needing to execute a transfer to retrieve the authorization. That was often a problem because the applications required always a "DNS resolvable domain" for the EDR token to be callbacked into the application. But with the EDR interface now the application can be deployed in the local machine from the consumer or in a private infrastructure and there it can still interact with the EDC, retrieving data and communicating with the other EDC (provider). Using the EDR interface the EDC will keep the channel open until any of the conditions change, allowing data to be exchanged in a very efficient way.
+
+Several applications right now are re doing the negotiation over and over again for every asset that wants to be retreived, causing the EDC to slow down affecting its performance.
+
+I have already done a proof of concept using this pattern and it works really good! The point is that the negotiation does not needs to be redone every time, if the data "pipe" is open the data exchange can flow, at least until one from the following conditions change:
+
+- New/change of policies to be accepted were defined by the consumer
+- A different application wants to be connected (change of asset)
+- The policy expiration time has expired
+
+And once this connection is open I need only the "transferProcessId" to get the authorization from the EDC, because the EDR is already being cached at the EDC, and the token will be kept updated.
+
+So the connection keeps open and is really really **FAST** (just depends on the content weight and the http overhead).
+
+In the end the level of abstraction is to say, as a consumer, I want to be able to call a "proxy", telling my conditions Policies, Asset to Connect, and then I can make make  "do_post" or "do_get" and all the connection details will be abstracted.
+
+With this approach the application can shift from one application to another. For example "Digital Twin Registry" and "Submodel Service" or any other app that I have the connection open.
+
+### 2.3 Story line
+
+#### 2.3.1 Prerequisites
+
+The following prerequisites are needed, how they are found is out of the scope, and is defined is up to the use case to define that.
+
+- The partner BPN (future DID) needs to be known.
+- The EDC needs to be know.
+- The Policies semantic & constraints need to be defined before hand
+- API path from the asset/application behind the edc provider needs to be known before hand (API Standard Interface)
+  - The asset/application I want to exchange needs to be known before hand, and referenced "uniquely"/as standardized in the EDC.
+
+
+#### 2.3.2 Connect Phase
+
+1. Consumer calls "do_get" for "Application A/Asset1"  with a specific "api path" which was found in the catalog of the EDC, and send a list of "policies that can be accepted" 
+2. "Proxy" application calls the EDC and checks if the "Asset1"  found in the Catalog contains at least one of the "policies that can be accepted", and selects the combination from asset and policy.
+3. If found EDR negotiation will be done for the asset and policy selected.
+4. The consumer shall wait around 10 seconds for the negotiation to appear, if it does not appears in 20 seconds then its broken. (Note that the negotiation status can still be checked)
+5. If an EDR is available, the "negotiationId" can be stored in the application side so it can be retrieved. And to reduce the need for calls to the EDC to get the EDR, the application can just store the:
+   - ContractAgreementId -> Tracks negotiation status in EDC, enables EDR refresh
+   - TransferProcessId -> Enables the Access Token retrieval at the EDC.
+
+> [!IMPORTANT]
+> The application **MUST** store this information under:
+>
+> - For which partner (BPN)
+> - For which EDC of the partner
+> - Which combination of policies were introduced in the input (hash)
+> - Which asset/application was selected
+>
+> If all this conditions stay the same the connection will remain open, until the EDC cuts the connection (because the contract agreement is not more valid)
+
+#### 2.3.3 Exchange Phase
+
+6. The application requests for the authorization token, for this transferProcessId and requests that the EDC refreshes it automatically. "auto_refresh"
+- If the token can not be retrieved, go back to step 1 and redo the connection
+- If the token is available, get the token and the dataplene url
+7. Query the data plane url concatenated with the "api path" provided at the beginning of the connection.
+8. "Proxy" will "proxy" the response back to the application.
+
+Now when the application wants to retrieve data again, the "proxy" application will reuse the `transferProcessId` to query the token (step 6) and will concatenate any other specified "api path" to the data plane url (step 8) until the open connection expires, so the (step 2) will be repeated.
+
+![Connect and Exchange Detailed](./media/connect&exchange-detailed.svg)
+
+In this way connections can be open 1 a year (10 seconds) between to companies for a specific application, and then it can be accessed over and over again, reusing this "tunnel" or "pipe" that is created between this two companies, retrieving data in last than "0,6253s" (tested by me) over and over again. And you can even open a second, third, fourth connection and shift in between applications and conditions.
+
+
+## 3. Potential Users
+
+Applications like the:
+- Digital Product Passport
+- Item Relationship Service
+- Certificate Management (possible use case)
+- PURIS
+- Simple Data Exchanger (needs to be refactored, or better recreated with a new name and purpose)
+- Demand and Capacity Managment
++ All the applications that use multiple assets in the EDC but do not need to renegotiate the terms when talking with the same asset.
+
+## 4. Advantages
+
+- Enables the usage of the EDC in a local machine or private infrastructure.
+    - Allows applications to be deployed in local and that can use the EDC as consumers.
+    - Example would be to have a "Tractus-X Browser" for the public data approach (https://github.com/eclipse-tractusx/sig-release/issues/924).
+- Use the EDC interfaces that are already implemented and used by some application s. 
+- The data exchange is really really fast. (Connection takes apron 10 seconds [EDC Dependance], and data exchange just depends on the HTTP time).
+- The data exchange is secure and the pipe open between two companies is a "secure channel". And this secure channel is maintained up to date between the EDC consumer and EDC provider automatically, always refreshed.
+- Easy to use for an application, only query "do_get" or "do_post" the rest will be handled.
+- The Eclipse Dataspace Connector can evolve and be optimized very fast and often without braking changes for the end user application.
+- Reduces the effort for maintainance for apps using the EDC. Just one component needs to be maintained.
+- Easies the adoption of new applications which do not need to include the logic from the EDC.
+- Enables a extra layer of security between the EDC and the data consumer, allowing the consumer to be protected from possible attacks from the EDC.
+- The same "proxy" application can be added in the other side of the EDC and enable a extra "common" security layer to the application.
+- Logic can be packed into an EDC extension.
+- Applications can retrieve data from different applications and shift connections in milliseconds. Example: First I call the DTR, then I call the Submodel Service, then I call the DTR again, then I call the submode service. All this in milliseconds (which is now not the case)
+- Reduces the vectors of attack to an application behind the EDC.
+
+## 5. Down Sides
+
+- Depends on the EDR interface of the EDC. 
+       - If it breaks, is discontinued or is not maintained it will not be more valid this pattern and the logic of the EDR will need to be reimplemented.
+       - The first EDR negotiation takes 10 seconds and requires a interactive intents to check when the "EDR" is available at the cache, maybe a callback can still be implemented to notify that the data is ready. But in this way a "domain" will be needed from the application side.
+- Requires the usage of an intermediate to talk with the EDC as an application.
+     - Maintenance of this component is required
+     - The maintenance can be complex (requires the EDC developers to maintain it)
+- If the policy expires it requires the renegotiation of the contract.
+- If one more policy wants to be accepted the negotiation needs to be repeated, since the conditions have changed. This may cause that some connections are open and not used (but is already less open connections that what we have now)
+- Requires timeout configurations, for waiting for the EDR of the EDC.
+- Would require the development of a new "Simple Data Exchanger" application, maybe a "Kickstart KIT" ??
+    - Or maybe it can be an EDC extension 
+
+
+## 6. Tasks
+
+- [ ] Define the draft concept in a branch and open a pull request.
+    - Detail the implementation enablements, which is required, providing examples
+    - Detail the architecture layer of Tractus-X
+    - Review the visibility of the pattern with the committers & architects.
+    - Mention this pattern in the feature that is being worked: https://github.com/eclipse-tractusx/sig-release/issues/924
+ - [ ] Raise Awareness for the users/applications of the Tractus-X dataspace
+ - [ ] Propose a Kickstart KIT, or similar reference implementation.
+
+## 7. Disclaimers
+
+- It was supposed that all the EDC systems are working and deployed in Internet at a working Catena-X/Tractus-X environment, with all their identities being already validated.
+- Some aspects from the DSP protocol were abstracted to reduce the complexity of the diagrams.
+- It was supposed that the policies are standardized and are known before hand, because it was known before the first catalog call.
+- The catalog request could be done using the vanilla "catalog" request or the federated catalog, it is not and will not be specified.
+- This concept just specifies how to handle the "authorization" as a data consumer. The same "application" can be used in both consumer and provider sides, for enabling a harmonized "data consuming" interface.
+- This applies to all the Tractus-X components that use the EDC connector, and enables them to use the EDC in a simple way, allowing the data retrieval to be optimized and harmonized between components. Fostering interoperability.
+- The frequency of the cache "dump" is up to the consumer to decide.
+- The way on how to find the "edc" connector is not specified, it is at least required to start the EDR negotiation, for retrieving the data.
+- The way of finding the partner you want to connect with was not specified, leaving open the possibility of abstracting this functionality in the future. BPN -> DID -> EDC -> Federated Catalog
+
