@@ -49,6 +49,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 | Name                  | Company | GitHub                                     | Role                                    |
 | --------------------- | ------- | ------------------------------------------ | --------------------------------------- |
+| Lars Geyer-Blaumeiser | Cofinity-X | [@lgblaumeiser](https://github.com/lgblaumeiser) | Architect Enablement Services | 
 | Mathias Brunkow Moser | Catena-X e.V.     | [@matbmoser](https://github.com/matbmoser) | Chief Software Architect & Eclipse Tractus-X Project Lead|
 |                       |         |                                            |                                         |
 |                       |         |                                            |                                         |
