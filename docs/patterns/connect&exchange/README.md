@@ -124,7 +124,7 @@ Right now the thing that is happening is that the connections are open, and they
 
 Often people don't really understand the sense of the Eclipse Dataspace Connector, in the end it is an "Infrastructure Enabler", it enables the infrastructure at your company, so information can be accessed, and what the EDC does is to set a "security layer" over the data endpoints. Several applications right now are re-doing the negotiation over and over again for every asset that wants to be retrieved, causing the EDC to slow down affecting its performance.
 
-<!--Add here a diagram where shows interactions behind the EDC-->
+![Connect and Exchange EDC](./media/edc-connector.svg)
 
 But in the end you will ALWAYS have applications or services behind the EDC which will respond with information or confirm that the operation was executed.
 
