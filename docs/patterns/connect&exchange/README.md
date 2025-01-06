@@ -41,7 +41,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 |**Dependencies/Target Group**|
 |-|
-| Eclipse Dataspace Connector, Any Tractus-X Consumer Application (DPP, DCM, IRS, PURIS, etc...) |
+| [Tractus-X Eclipse Dataspace Connector](), Any Tractus-X Consumer Application (DPP, DCM, IRS, PURIS, etc...) |
 
 ### Authors
 
@@ -49,8 +49,8 @@ SPDX-License-Identifier: CC-BY-4.0
 
 | Name                  | Company | GitHub                                     | Role                                    |
 | --------------------- | ------- | ------------------------------------------ | --------------------------------------- |
-| Lars Geyer-Blaumeiser | Cofinity-X | [@lgblaumeiser](https://github.com/lgblaumeiser) | Architect Enablement Services & Eclipse Tractus-X Committer | 
-| Mathias Brunkow Moser | Catena-X e.V.     | [@matbmoser](https://github.com/matbmoser) | Chief Software Architect & Eclipse Tractus-X Project Lead|
+| Lars Geyer-Blaumeiser | Cofinity-X | [@lgblaumeiser](https://github.com/lgblaumeiser) | Architect Enablement Services & Eclipse Tractus-X Committer |
+| Mathias Brunkow Moser | Catena-X e.V. | [@matbmoser](https://github.com/matbmoser) | Chief Software Architect & Eclipse Tractus-X Project Lead |
 |                       |         |                                            |                                         |
 |                       |         |                                            |                                         |
 
@@ -83,8 +83,10 @@ The same applies to:
 
 > You don't need to understand the DSP protocol to use the Tractus-X network as an application
 
-Nowadays, there is a big overhead at the "Application" layer from Tractus-X. Every application is using the Eclipse Dataspace Connector (EDC) in their own way. In case of Tractus-X we are using the [Tractus-X EDC](https://github.com/eclipse-tractusx/tractusx-edc).  The problem is that there is no harmonization in between the consumer and provider applications how they can in the most optimized way, and specially in a "fast" way retrieve data from the network. 
-They first need to understand how the complete protocol and EDC works to finally adopt the network.
+Nowadays, there is a big overhead at the "Application" layer from Tractus-X. Every application is using the Eclipse Dataspace Connector (EDC) in their own way. In case of Tractus-X we are using the [Tractus-X EDC](https://github.com/eclipse-tractusx/tractusx-edc).
+The problem is that there is no harmonization on the "contract" management in between the consumer and provider applications. At the moment contract agreements are being open for every data retrieval and they are not being reused, creating a overhead at the [Tractus-X EDC](https://github.com/eclipse-tractusx/tractusx-edc) gateaway.
+
+There is missing a clear line on how to manage the connections which are open when contract agreements are finalized. This is causing that data retrievals from the Tractus-X Applications to take a significant ammount of time exponentially. This is due that always when a new use case application wants to start, they will first need to understand how the complete protocol and EDC works to finally adopt the network. Which may lead to a incorrect use of the EDC contract management. Therfore there is a clear need for showing data consumer applications how they can specially in a "fast" way retrieve data from the network and manage their connections with applications and services (asset) behind the EDC.
 
 Therefore, there was built the "EDR" (Endpoint Data Reference) Interface. It was built for simplifying the negotiation and transfer process for the application. Now it is stable since the Jupiter release from Catena-X (TX-EDC >v0.7.5) and is available out there, however there is no usage pattern yet provider for the application side.
 
@@ -120,15 +122,17 @@ Right now the thing that is happening is that the connections are open, and they
 
 ### 2.2 Description
 
-Often people don't really understand the sense of the Eclipse Dataspace Connector, in the end it is an "Infrastructure Enabler", it enables the infrastructure at your company, so information can be accessed, and what the EDC does is to set a "security layer" over the data endpoints.
+Often people don't really understand the sense of the Eclipse Dataspace Connector, in the end it is an "Infrastructure Enabler", it enables the infrastructure at your company, so information can be accessed, and what the EDC does is to set a "security layer" over the data endpoints. Several applications right now are re-doing the negotiation over and over again for every asset that wants to be retrieved, causing the EDC to slow down affecting its performance.
+
+<!--Add here a diagram where shows interactions behind the EDC-->
 
 But in the end you will ALWAYS have applications or services behind the EDC which will respond with information or confirm that the operation was executed.
 
 The only thing that it creates is a "PIPE" in between the companies and the connection remains open.
 
-Using the EDR interface applications are able to negotiate assets from the catalog without needing to execute a transfer to retrieve the authorization. That was often a problem because the applications always required a "DNS resolvable domain" for the EDR token to be call backed into the application. But with the EDR interface now the application can be deployed in the local machine from the consumer or in a private infrastructure and there it can still interact with the EDC, retrieving data and communicating with the other EDC (provider). Using the EDR interface the EDC will keep the channel open until any of the conditions change, allowing data to be exchanged in a very efficient way.
+<!-- Specify what PIPE means with the a diagram-->
 
-Several applications right now are re-doing the negotiation over and over again for every asset that wants to be retrieved, causing the EDC to slow down affecting its performance.
+Using the EDR interface applications are able to negotiate assets from the catalog without needing to execute a transfer to retrieve the authorization. That was often a problem because the applications always required a "DNS resolvable domain" for the EDR token to be call backed into the application. But with the EDR interface now the application can be deployed in the local machine from the consumer or in a private infrastructure and there it can still interact with the EDC, retrieving data and communicating with the other EDC (provider). Using the EDR interface the EDC will keep the channel open until any of the conditions change, allowing data to be exchanged in a very efficient way.
 
 There was effectuated several proofs of concepts using this pattern, and it works perfect! The point is that the negotiation does not need to be redone every time, if the data "pipe" is open the data exchange can flow, at least until one from the following conditions change:
 
@@ -136,13 +140,16 @@ There was effectuated several proofs of concepts using this pattern, and it work
 - A different application wants to be connected (change of asset)
 - The policy expiration time has expired
 
-And once this connection is open I need only the `transferProcessId` to get the authorization from the EDC, because the EDR is already being cached at the EDC, and the token will be kept updated.
+And once this connection is open I need only the "Transfer Process Identification" to get the authorization from the EDC, because the EDR is already being cached at the EDC, and the token will be kept updated.
 
 So the connection keeps open and is really **FAST** (just depends on the content weight and the HTTP overhead).
 
 In the end the level of abstraction is to say, as a consumer, I want to be able to call a "proxy", telling my conditions Policies, Asset to Connect, and then I can make "do_post" or "do_get" and all the connection details will be abstracted.
 
 With this approach the application can shift from one application to another. For example "Digital Twin Registry" and "Submodel Service" or any other app that I have the connection open.
+
+> [!WARNING]
+> This pattern is currently only valid for "Consumer PULL" interactions. The EDR interface currently does not supports the "Provider PUSH" interaction.
 
 ### 2.3 Story line
 
@@ -154,12 +161,11 @@ The following prerequisites are needed, how they are found is out of the scope, 
 - The EDC needs to be known.
 - The Policies semantic & constraints need to be defined beforehand
 - API path from the asset/application behind the EDC provider needs to be known beforehand (API Standard Interface)
-  - The asset/application I want to exchange needs to be known beforehand, and referenced "uniquely"/as standardized in the EDC.
-
+  - The asset/application I want to exchange needs to be known beforehand, and referenced in the EDC "uniquely"/as standardized by Catena-X or any other dataspace.
 
 #### 2.3.2 Connect Phase
 
-1. Consumer calls "do_get" for "Application A/Asset1" with a specific "API path" which was found in the catalog of the EDC, and send a list of "policies that can be accepted" 
+1. Consumer calls "do_get" for "Application A/Asset1" with a specific "API path" which was found in the catalog of the EDC, and send a list of "policies that can be accepted".
 2. "Proxy" application calls the EDC and checks if the "Asset1" found in the Catalog contains at least one of the "policies that can be accepted", and selects the combination from asset and policy.
 3. If found EDR negotiation will be done for the asset and policy selected.
 4. The consumer shall wait around 10 seconds for the negotiation to appear, if it does not appear in 20 seconds then its broken. (Note that the negotiation status can still be checked)
@@ -227,6 +233,7 @@ Applications like the:
 ## 5. Downsides
 
 - Depends on the EDR interface of the EDC.
+       - Currently only support "Consumer PULL", the EDR interface should be updated to support also "Provider PUSH".
        - If it breaks, is discontinued or is not maintained it will not be more valid this pattern and the logic of the EDR will need to be reimplemented.
        - The first EDR negotiation takes 10 seconds and requires an interactive intent to check when the "EDR" is available at the cache, maybe a callback can still be implemented to notify that the data is ready. But in this way a "domain" will be needed from the application side.
 - Requires the usage of an intermediate to talk with the EDC as an application.
@@ -237,6 +244,7 @@ Applications like the:
 - Requires timeout configurations, for waiting for the EDR of the EDC.
 - Would require the development of a new "Simple Data Exchanger" application, maybe a "Kickstart KIT" ??
   - Or maybe it can be an EDC extension
+- Providing a Library in multiple programming languages would be benefitial to implement this pattern in a harmonized way.
 
 ## 6. Disclaimers
 
