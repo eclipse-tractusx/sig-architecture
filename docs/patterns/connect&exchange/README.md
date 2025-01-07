@@ -130,7 +130,8 @@ But in the end you will ALWAYS have applications or services behind the EDC whic
 
 The only thing that it creates is a "PIPE" in between the companies and the connection remains open.
 
-<!-- Specify what PIPE means with the a diagram-->
+![Connect and Exchange Pipe](./media/edc-connector-infoflow.svg)
+
 
 Using the EDR interface applications are able to negotiate assets from the catalog without needing to execute a transfer to retrieve the authorization. That was often a problem because the applications always required a "DNS resolvable domain" for the EDR token to be call backed into the application. But with the EDR interface now the application can be deployed in the local machine from the consumer or in a private infrastructure and there it can still interact with the EDC, retrieving data and communicating with the other EDC (provider). Using the EDR interface the EDC will keep the channel open until any of the conditions change, allowing data to be exchanged in a very efficient way.
 
