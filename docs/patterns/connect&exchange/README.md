@@ -20,7 +20,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 <div align="center">
   <img alt="Version:  v0.1" src="https://img.shields.io/badge/Version-v0.1-blue?style=for-the-badge">
-  <img alt="STATUS: DRAFT" src="https://img.shields.io/badge/Status-DRAFT-D3D3D3?style=for-the-badge">
+  <img alt="STATUS: RECOMMENDED" src="https://img.shields.io/badge/Status-RECOMMENDED-FF00C9?style=for-the-badge">
   <br>
   <h1> Connect & Exchange Dataspace Usage Pattern </h1>
 </div>
