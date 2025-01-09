@@ -29,7 +29,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 |**Version**| **Created at** | **Last Reviewed at** |
 |-|-|-|
-| v0.1 | Dec, 17th, 2024 | Jan, 3rd, 2025 |
+| v0.1 | Dec, 17th, 2024 | Jan, 9th, 2025 |
 
 |**Type**|**Category**|
 |-|-|
@@ -43,7 +43,7 @@ SPDX-License-Identifier: CC-BY-4.0
 |-|
 | [Tractus-X Eclipse Dataspace Connector](), Any Tractus-X Consumer Application (DPP, DCM, IRS, PURIS, etc...) |
 
-### Authors
+### Authors & Reviewers
 
 <!--Add yourself to the list if you review/contribute to this document-->
 
@@ -51,13 +51,13 @@ SPDX-License-Identifier: CC-BY-4.0
 | --------------------- | ------- | ------------------------------------------ | --------------------------------------- |
 | Lars Geyer-Blaumeiser | Cofinity-X | [@lgblaumeiser](https://github.com/lgblaumeiser) | Architect Enablement Services & Eclipse Tractus-X Committer |
 | Mathias Brunkow Moser | Catena-X e.V. | [@matbmoser](https://github.com/matbmoser) | Chief Software Architect & Eclipse Tractus-X Project Lead |
-|                       |         |                                            |                                         |
+| Andrea Bertagnolli  | Think It | [@ndr-brt](https://github.com/ndr-brt)  | Software Engineer & Eclipse Tractus-X Committer                |
 |                       |         |                                            |                                         |
 
 ## Index
 
 - [Metadata](#metadata)
-  - [Authors](#authors)
+  - [Authors \& Reviewers](#authors--reviewers)
 - [Index](#index)
 - [1.  Context](#1--context)
 - [2. The pattern](#2-the-pattern)
