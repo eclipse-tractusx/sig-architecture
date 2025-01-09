@@ -132,7 +132,6 @@ The only thing that it creates is a "PIPE" in between the companies and the conn
 
 ![Connect and Exchange Pipe](./media/edc-connector-infoflow.svg)
 
-
 Using the EDR interface applications are able to negotiate assets from the catalog without needing to execute a transfer to retrieve the authorization. That was often a problem because the applications always required a "DNS resolvable domain" for the EDR token to be call backed into the application. But with the EDR interface now the application can be deployed in the local machine from the consumer or in a private infrastructure and there it can still interact with the EDC, retrieving data and communicating with the other EDC (provider). Using the EDR interface the EDC will keep the channel open until any of the conditions change, allowing data to be exchanged in a very efficient way.
 
 There was effectuated several proofs of concepts using this pattern, and it works perfect! The point is that the negotiation does not need to be redone every time, if the data "pipe" is open the data exchange can flow, at least until one from the following conditions change:
@@ -141,11 +140,13 @@ There was effectuated several proofs of concepts using this pattern, and it work
 - A different application wants to be connected (change of asset)
 - The policy expiration time has expired
 
-And once this connection is open I need only the "Transfer Process Identification" to get the authorization from the EDC, because the EDR is already being cached at the EDC, and the token will be kept updated.
+And once this connection is open I need only the "Transfer Process Identification" to get the authorization from the EDC, because the EDR is already being cached at the EDC, and the token will be kept updated. Then will be just up to the consumer to "dump" the cache when ever it is considered necessary.
 
 So the connection keeps open and is really **FAST** (just depends on the content weight and the HTTP overhead).
 
-In the end the level of abstraction is to say, as a consumer, I want to be able to call a "proxy", telling my conditions Policies, Asset to Connect, and then I can make "do_post" or "do_get" and all the connection details will be abstracted.
+In the end the level of abstraction is to say, as a consumer, I want to be able to call a "edc library service", telling my conditions Policies, Asset to Connect, and then I can make "do_post" or "do_get" and all the connection details will be abstracted.
+
+![Architecture edc library](./media/architecture-edc-library.svg)
 
 With this approach the application can shift from one application to another. For example "Digital Twin Registry" and "Submodel Service" or any other app that I have the connection open.
 
@@ -225,11 +226,7 @@ Applications like the:
 - The Eclipse Dataspace Connector can evolve and be optimized very fast and often without braking changes for the end user application.
 - Reduces the effort for maintenance for apps using the EDC. Just one component needs to be maintained.
 - Easier the adoption of new applications which do not need to include the logic from the EDC.
-- Enables an extra layer of security between the EDC and the data consumer, allowing the consumer to be protected from possible attacks from the EDC.
-- The same "proxy" application can be added in the other side of the EDC and enable an extra "common" security layer to the application.
-- Logic can be packed into an EDC extension.
 - Applications can retrieve data from different applications and shift connections in milliseconds. Example: First I call the DTR, then I call the Submodel Service, then I call the DTR again, then I call the submodel service. All this in milliseconds (which is now not the case)
-- Reduces the vectors of attack to an application behind the EDC.
 
 ## 5. Downsides
 
@@ -240,12 +237,10 @@ Applications like the:
 - Requires the usage of an intermediate to talk with the EDC as an application.
   - Maintenance of this component is required
   - The maintenance can be complex (requires the EDC developers to maintain it)
-- If the policy expires it requires the renegotiation of the contract.
-- If one more policy wants to be accepted the negotiation needs to be repeated, since the conditions have changed. This may cause that some connections are open and not used (but is already less open connections that what we have now)
 - Requires timeout configurations, for waiting for the EDR of the EDC.
 - Would require the development of a new "Simple Data Exchanger" application, maybe a "Kickstart KIT" ??
   - Or maybe it can be an EDC extension
-- Providing a Library in multiple programming languages would be benefitial to implement this pattern in a harmonized way.
+- Providing a Library in multiple programming languages would be benefitial to implement this pattern in a harmonized way. This library shall provides a service that is able to talk with the EDC management API as a consumer, and is able to retrieve data for the applications by simply doing "do_post" and "do_get"
 
 ## 6. Disclaimers
 
@@ -254,10 +249,11 @@ Applications like the:
 - It was supposed that the policies are standardized and are known beforehand, because it was known before the first catalog call.
 - The catalog request could be done using the vanilla "catalog" request or the federated catalog, it is not and will not be specified.
 - This concept just specifies how to handle the "authorization" as a data consumer. The same "application" can be used in both consumer and provider sides, for enabling a harmonized "data consuming" interface.
-- This applies to all the Tractus-X components that use the EDC connector, and enables them to use the EDC in a simple way, allowing the data retrieval to be optimized and harmonized between components. Fostering interoperability.
+- This applies to all the Tractus-X components that use the EDC connector, and enables them to use the EDC in a simple way, allowing the data retrieval to be optimized and harmonized between components. Fostering more compatibility with the Tractus-X EDC, allowing applications to be easily interoperable with the Dataspace, because it will be easy to use and integrate.
 - The frequency of the cache "dump" is up to the consumer to decide.
 - The way on how to find the "EDC" connector is not specified, it is at least required to start the EDR negotiation, for retrieving the data.
 - The way of finding the partner you want to connect with was not specified, leaving open the possibility of abstracting this functionality in the future. BPN → DID → EDC → Federated Catalog
+
 
 ## NOTICE
 
