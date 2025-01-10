@@ -84,29 +84,25 @@ The same applies to:
 > You don't need to understand the DSP protocol to use the Tractus-X network as an application
 
 Nowadays, there is a big overhead at the "Application" layer from Tractus-X. Every application is using the Eclipse Dataspace Connector (EDC) in their own way. In case of Tractus-X we are using the [Tractus-X EDC](https://github.com/eclipse-tractusx/tractusx-edc).
-The problem is that there is no harmonization on the "contract" management in between the consumer and provider applications. At the moment contract agreements are being open for every data retrieval and they are not being reused, creating a overhead at the [Tractus-X EDC](https://github.com/eclipse-tractusx/tractusx-edc) gateaway.
+The problem is that there is no harmonization on the "contract" management in between the consumer and provider applications. At the moment contract agreements are being opened for every data retrieval and they are not being reused, creating a overhead at the [Tractus-X EDC](https://github.com/eclipse-tractusx/tractusx-edc) gateway.
 
-There is missing a clear line on how to manage the connections which are open when contract agreements are finalized. This is causing that data retrievals from the Tractus-X Applications to take a significant ammount of time exponentially. This is due that always when a new use case application wants to start, they will first need to understand how the complete protocol and EDC works to finally adopt the network. Which may lead to a incorrect use of the EDC contract management. Therfore there is a clear need for showing data consumer applications how they can specially in a "fast" way retrieve data from the network and manage their connections with applications and services (asset) behind the EDC.
+There is missing a common understanding on how to manage the open connections, i.e., where finalized contract agreements exist. This is causing that data retrievals from the Tractus-X Applications take a significant ammount of time. This is due because all use case application developer need to understand the EDC interactions without much guidance on favorable patterns that would improve efficiency of the exchange. Therefore, there is a clear need for showing data consumer applications how they should implement the retrieval of data and the management of existing connections.
 
-Therefore, there was built the "EDR" (Endpoint Data Reference) Interface. It was built for simplifying the negotiation and transfer process for the application. Now it is stable since the Jupiter release from Catena-X (TX-EDC >v0.7.5) and is available out there, however there is no usage pattern yet provider for the application side.
+The "EDR" (Endpoint Data Reference) Interface has been built for simplifying the negotiation and transfer process for the application. It has been introduced with the Jupiter release from Catena-X, however there is no usage pattern recommendation yet provided for application developer.
 
-Another point is, the EDC still needs to be optimized and several breaking changes are being planned for the future, and therefore all the applications will need to change their way they use the EDC.
 
-For example: If in the future we want to move to the "bring your own identity approach" where everyone brings their DID we need then to expect the applications will care about this.
-And that is a huge amount of work for applications to be adapting every release to the latest "base" data space components.
 
-Therefore, this pattern aims to reduce the complexity on the Application layer, easing the adoption of the dataspace for any application using the EDC.
+Another issue to consider is, that there is still some need to optimize the connector which will lead to changing patterns in the interaction with the connector. The proposed pattern helps in this regard as well, as it simplifies the interactions between application and connector. As a consequence, adapting to future changes will get simpler and maintainability of the application is improved.
 
 In the end from the application side there is only two things that matter when consuming information:
 
 - Which is the "Dataplane URL"
 - Which authorization token I need.
 
-The rest can be abstracted, and this is going to be defined here in this usage pattern which could be implemented in a reference implementation or at any application if followed correctly.
+The rest can be abstracted, and this is going to be defined here in this usage pattern which could be implemented in a reference implementation or at any application.
 
 ![Connect and Exchange Pattern Simple](./media/connect&exchange-context.svg)
 
-Right now the thing that is happening is that the connections are open, and they are not used. The Eclipse Dataspace Connector was not designed to keep so many connections open, for every asset we want to retrieve a new connection is open, and just one data exchange is done, and then the connection keeps open. And the applications are not aware of that.
 
 ## 2. The pattern
 
@@ -122,25 +118,26 @@ Right now the thing that is happening is that the connections are open, and they
 
 ### 2.2 Description
 
-Often people don't really understand the sense of the Eclipse Dataspace Connector, in the end it is an "Infrastructure Enabler", it enables the infrastructure at your company, so information can be accessed, and what the EDC does is to set a "security layer" over the data endpoints. Several applications right now are re-doing the negotiation over and over again for every asset that wants to be retrieved, causing the EDC to slow down affecting its performance.
+The Eclipse Dataspace Connector is an "Infrastructure Enabler", i.e., it enriches the ability to provide or consume data from another party with data sovereignty. This is achieved by entering a legally binding contract with proven participants into the exchange. It also allows providers to offer data to dataspace participants not known to him with defined policies and to also restrict the access to data to a defined subset of the dataspace participants. Once a contract is established, the consumer can access the data until the contract terminates, i.e., a continuous data connection is established between services that reside behind the connector which they can make use of until the contract expires.
+
+The common practise to renegotiate a contract for the same asset multiple times is not necessary and just makes the whole effort to consume data more time consuming and creates lots of redundant legally binding contracts.
 
 ![Connect and Exchange EDC](./media/edc-connector.svg)
 
-But in the end you will ALWAYS have applications or services behind the EDC which will respond with information or confirm that the operation was executed.
 
 The only thing that it creates is a "PIPE" in between the companies and the connection remains open.
 
 ![Connect and Exchange Pipe](./media/edc-connector-infoflow.svg)
 
-Using the EDR interface applications are able to negotiate assets from the catalog without needing to execute a transfer to retrieve the authorization. That was often a problem because the applications always required a "DNS resolvable domain" for the EDR token to be call backed into the application. But with the EDR interface now the application can be deployed in the local machine from the consumer or in a private infrastructure and there it can still interact with the EDC, retrieving data and communicating with the other EDC (provider). Using the EDR interface the EDC will keep the channel open until any of the conditions change, allowing data to be exchanged in a very efficient way.
+The new implementation of the EDR interface gets rid of the prior need for a callback to retrieve the access token for retrieving the data from the provider. This was often a problem because the applications always required a "DNS resolvable domain" for the EDR token to be call backed into the application. But with the EDR interface now the application can be deployed, e.g., in a private cloud setting at the consumer and still can interact with the EDC without any backchannel that would require, e.g., a firewall hole to make the application reachable from the EDC.
 
 There was effectuated several proofs of concepts using this pattern, and it works perfect! The point is that the negotiation does not need to be redone every time, if the data "pipe" is open the data exchange can flow, at least until one from the following conditions change:
 
 - New/change of policies to be accepted were defined by the consumer
-- A different application wants to be connected (change of asset)
-- The policy expiration time has expired
+- A different connector assets wants to be accessed
+- The contract has an expiration time and that has been reached.
 
-And once this connection is open I need only the "Transfer Process Identification" to get the authorization from the EDC, because the EDR is already being cached at the EDC, and the token will be kept updated. Then will be just up to the consumer to "dump" the cache when ever it is considered necessary.
+As soon as the contract negotiation is finalized, the consumer connector based on identifiers related to the contract receive the access token via the EDR interface. Token renewal is done automatically for him, if the available token expires. ```
 
 So the connection keeps open and is really **FAST** (just depends on the content weight and the HTTP overhead).
 
