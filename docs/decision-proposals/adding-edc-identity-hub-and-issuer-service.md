@@ -29,7 +29,7 @@ Add two new repositories for Tractus-X distributions of the [Eclipse EDC Identit
 
 ## Rationale
 
-Going forward, the Tractus-X IdentityHub distribution (based on [EDC IdentityHub](https://github.com/eclipse-edc/IdentityHub)) will serve as the open-source basis for credential wallets in Tractus-X, both managed and self-hosted.
+Going forward, the Tractus-X IdentityHub distribution (based on [EDC IdentityHub](https://github.com/eclipse-edc/IdentityHub)) will serve as the open-source basis for credential services ("wallets") in Tractus-X, both managed and self-hosted.
 
 In the same manner, the Tractus-X IssuerService will replace the current `ssi-credential-issuer` component.
 
