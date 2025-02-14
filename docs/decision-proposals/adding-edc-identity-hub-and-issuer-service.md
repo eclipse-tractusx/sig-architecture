@@ -27,13 +27,15 @@ Add two new repositories for Tractus-X distributions of the [Eclipse EDC Identit
 - `tractusx-identityhub`
 - `tractusx-issuerservice`
 
+From release 25.09 onwards, the current [ssi-credential-issuer](https://github.com/eclipse-tractusx/ssi-credential-issuer) will no longer be needed in the Catena-X architecture and will therefore no longer need to be maintained.
+
+Responsible committers for the new repositories as of now are Boris Rizov (@borisrizov-zf) and Rafael Magalhães (@rafaelmag110).
+
 ## Rationale
 
-Going forward, the Tractus-X IdentityHub distribution (based on [EDC IdentityHub](https://github.com/eclipse-edc/IdentityHub)) will serve as the open-source basis for credential services ("wallets") in Tractus-X, both managed and self-hosted.
-
-In the same manner, the Tractus-X IssuerService will replace the current `ssi-credential-issuer` component.
-
-Therefor, Tractus-X distributions of these upstream components are needed, which will be developed and maintained in the aforementioned Tractus-X repositories.
+Going forward, the Tractus-X IdentityHub distribution (based on [EDC IdentityHub](https://github.com/eclipse-edc/IdentityHub)) will serve as the open-source basis for credential services ("wallets") in Tractus-X.
+In the same manner, the Tractus-X Issuer Service will replace the current [ssi-credential-issuer](https://github.com/eclipse-tractusx/ssi-credential-issuer) component.
+Therefore, Tractus-X distributions of these upstream components are needed, which will be developed and maintained in the aforementioned Tractus-X repositories.
 
 The current [SSI Credential Issuer](https://github.com/eclipse-tractusx/ssi-credential-issuer) has several drawbacks:
 
