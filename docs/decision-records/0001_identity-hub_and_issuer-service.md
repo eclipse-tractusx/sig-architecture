@@ -22,13 +22,10 @@ SPDX-License-Identifier: CC-BY-4.0
 
 ## Problem statement
 
-As the [`managed-identity-wallet`](https://github.com/eclipse-tractusx/managed-identity-wallet) component (a.k.a MIW) was our reference implementation from the wallet, and it is now deprecated, we need to take a decision on a way forward on providing an open source reference implementation for the "wallet" and "decentralized claims protocol" (a.k.a DCP) enforcement. This decision is influenced by the fact that the decentralization of the wallet implementation is a path which is was decided from the first Catena-X consortium architecture roadmap for a more scalable, secure and interoperable data exchange. 
-
-Since the MIW was deprecated and also never used in production because of security reasons, because the only way to test the data exchange available right now is the [`ssi-dim-wallet-stub`](https://github.com/eclipse-tractusx/ssi-dim-wallet-stub) which implements only a minimal viable wallet with no DCP logic- 
-
-The [`ssi-issuer-service`] is a service which provided already some interfaces and logics to issue credentials for Catena-X members based on a primitive implementation of the `Decentralized Claims Protocol`, which provider the Verifiable Credential signature service. 
-
-Therefore for increasing the flexibility and the future extension of protocols, the upstream [`issuer-service`]()  and the upstream [`identity-hub`](https://github.com/eclipse-edc/IdentityHub) are going to be used to make it more scalable
+The current Tractus-X architecture is dependent on a proprietary credential service ("wallet") for both managing and issuing verifiable credentials.
+This renders it impossible to run a Catena-X dataspace using only open-source software.
+To remove this dependency, we need both a new open-source credential service and an issuer service that does not rely on proprietary software.
+Both must implement the [Decentralized Claims Protocol](https://eclipse-dataspace-dcp.github.io/decentralized-claims-protocol/), which Catena-X has committed to.
 
 ## Possible approaches
 
