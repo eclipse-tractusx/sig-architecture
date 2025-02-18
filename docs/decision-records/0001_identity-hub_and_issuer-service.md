@@ -19,7 +19,8 @@ SPDX-License-Identifier: CC-BY-4.0
 -->
 
 # Decision Proposal: Adding Tractus-X IdentityHub and Tractux-X IssuerService
-## Context
+
+## Problem statement
 
 As the [`managed-identity-wallet`](https://github.com/eclipse-tractusx/managed-identity-wallet) component (a.k.a MIW) was our reference implementation from the wallet, and it is now deprecated, we need to take a decision on a way forward on providing an open source reference implementation for the "wallet" and "decentralized claims protocol" (a.k.a DCP) enforcement. This decision is influenced by the fact that the decentralization of the wallet implementation is a path which is was decided from the first Catena-X consortium architecture roadmap for a more scalable, secure and interoperable data exchange. 
 
@@ -28,6 +29,23 @@ Since the MIW was deprecated and also never used in production because of securi
 The [`ssi-issuer-service`] is a service which provided already some interfaces and logics to issue credentials for Catena-X members based on a primitive implementation of the `Decentralized Claims Protocol`, which provider the Verifiable Credential signature service. 
 
 Therefore for increasing the flexibility and the future extension of protocols, the upstream [`issuer-service`]()  and the upstream [`identity-hub`](https://github.com/eclipse-edc/IdentityHub) are going to be used to make it more scalable
+
+## Possible approaches
+
+Theoretically, it would be possible to continue development of the `ssi-credential-issuer` component until all of the aforementioned drawbacks are addressed.
+However, doing so would amount to an almost complete rewrite of the application due to significant architectural differences, while additionally suffering from the following drawbacks:
+
+- duplicate all development and testing efforts around DCP that are _already implemented upstream,_ specifically:
+  - JSON-LD algorithms (Note that this has nothing to do with the proof type of credentials, JSON-LD is simply required by the DCP endpoints.)
+  - cryptographic utilities, keys, signatures
+  - all model classes, support for VC DataModel 1.1 _and_ 2.0
+  - credential status list services
+  - a generic credential generation framework
+- devise, implement and test a complete extensibility framework
+- implement, test, and maintain an admin API to be consumed by portal
+
+Given the development and maintenance efforts that would be necessary, refactoring the `ssi-credential-issuer` is not a viable alternative.
+
 ## Proposed decision
 
 Add two new repositories for Tractus-X distributions of the [Eclipse EDC IdentityHub and IssuerService](https://github.com/eclipse-edc/IdentityHub):
@@ -59,18 +77,3 @@ Provision two new repositories (related PRs [tractusx-identityhub](https://githu
 
 The relevant components from upstream developments will be used as standard dependencies in the Tractus-X distributions, which reduces necessary efforts concerning development, testing and maintenance significantly.
 
-## Possible alternatives
-
-Theoretically, it would be possible to continue development of the `ssi-credential-issuer` component until all of the aforementioned drawbacks are addressed.
-However, doing so would amount to an almost complete rewrite of the application due to significant architectural differences, while additionally suffering from the following drawbacks:
-
-- duplicate all development and testing efforts around DCP that are _already implemented upstream,_ specifically:
-  - JSON-LD algorithms (Note that this has nothing to do with the proof type of credentials, JSON-LD is simply required by the DCP endpoints.)
-  - cryptographic utilities, keys, signatures
-  - all model classes, support for VC DataModel 1.1 _and_ 2.0
-  - credential status list services
-  - a generic credential generation framework
-- devise, implement and test a complete extensibility framework
-- implement, test, and maintain an admin API to be consumed by portal
-
-Given the development and maintenance efforts that would be necessary, refactoring the `ssi-credential-issuer` is not a viable alternative.
