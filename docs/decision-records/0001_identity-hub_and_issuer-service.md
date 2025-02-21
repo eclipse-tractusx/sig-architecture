@@ -105,14 +105,12 @@ A Tractus-X distribution of the [Eclipse EDC IdentityHub](https://github.com/ecl
 A Tractus-X distribution fo the [Eclipse EDC Issuer Service](https://github.com/eclipse-edc/IdentityHub) replaces the current [ssi-credential-issuer](https://github.com/eclipse-tractusx/ssi-credential-issuer) as the implementation of the Tractus-X issuer.
 
 ### Rationale
-[//]: # (Why is this decision taken)
 
 - continuing development on the [ssi-credential-issuer](https://github.com/eclipse-tractusx/ssi-credential-issuer) until all requirements listed above are met involves an amount of work essentially equivalent to a rewrite from scratch 
 - introducing Tractus-X distributions of upstream dataspace-agnostic projects is essential for interoperability with other dataspaces
 - using components from upstream projects as standard dependencies in Tractus-X distributions reduces development, testing, and maintenance effort within Tractus-X
 
 ### Actions
-[//]: # (What direct next steps should be taken because of this decision?)
 
 Add two new repositories (related PRs [tractusx-identityhub](https://github.com/eclipse-tractusx/.eclipsefdn/pull/117) and [tractusx-issuerservice](https://github.com/eclipse-tractusx/.eclipsefdn/pull/118)) for Tractus-X distributions of the [Eclipse EDC IdentityHub and IssuerService](https://github.com/eclipse-edc/IdentityHub):
 
@@ -124,6 +122,5 @@ Use the relevant components from upstream developments as standard dependencies 
 Responsible committers for the new repositories as of now are Boris Rizov (@borisrizov-zf) and Rafael Magalhães (@rafaelmag110).
 
 ### Implications
-[//]: # (What happens as a direct consequence of this decision?)
 
 From release 25.09 onwards, the current [ssi-credential-issuer](https://github.com/eclipse-tractusx/ssi-credential-issuer) will no longer be needed in the Catena-X architecture and will therefore no longer need to be maintained.
