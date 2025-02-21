@@ -35,10 +35,10 @@ Possible approaches are evaluated based on a set of requirements the issuer serv
 
 The issuer service should support the following features without delegation to or reliance on external, proprietary services:
 
-- VC creation
+- credential creation
 - VC signing
 - VC revocation
-- did management
+- DID management
 - key management
 - implement the DCP protocol
 
