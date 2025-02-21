@@ -18,7 +18,7 @@ SPDX-License-Identifier: CC-BY-4.0
 #######################################################################
 -->
 
-# Decision Record: Adding Tractus-X IdentityHub and Tractux-X IssuerService
+# Decision Record: Adding Tractus-X IdentityHub and Tractus-X IssuerService
 
 ## Problem statement
 
