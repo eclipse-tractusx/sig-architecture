@@ -23,8 +23,9 @@ SPDX-License-Identifier: CC-BY-4.0
 ## Problem statement
 
 The current Tractus-X architecture is dependent on a proprietary credential service ("wallet") for both managing and issuing verifiable credentials.
+In the past, the Managed Identity Wallet served as the Tractus-X credential service, but its design as a central managed wallet renders it unsuitable for use as a decentralised credential service.
 This renders it impossible to run a Catena-X dataspace using only open-source software.
-To remove this dependency, we need both a new open-source credential service and an issuer service that does not rely on proprietary software.
+To remove this dependency, a new open-source credential service and an issuer service that does not rely on proprietary software are needed.
 Both must implement the [Decentralized Claims Protocol](https://eclipse-dataspace-dcp.github.io/decentralized-claims-protocol/), which Catena-X has committed to.
 
 ## Evaluation criteria
