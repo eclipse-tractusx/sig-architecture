@@ -27,6 +27,36 @@ This renders it impossible to run a Catena-X dataspace using only open-source so
 To remove this dependency, we need both a new open-source credential service and an issuer service that does not rely on proprietary software.
 Both must implement the [Decentralized Claims Protocol](https://eclipse-dataspace-dcp.github.io/decentralized-claims-protocol/), which Catena-X has committed to.
 
+## Evaluation criteria
+
+Possible approaches are evaluated based on a set of requirements the issuer service should fulfil.
+
+### Functional
+
+The issuer service should support the following features without delegation to or reliance on external, proprietary services:
+
+- VC creation
+- VC signing
+- VC revocation
+- did management
+- key management
+- implement the DCP protocol
+
+### Non-functional
+
+#### Reusability across Manufacturing-X
+
+To enable interoperability with other dataspaces, the issuer service must not be specific to the Catena-X dataspace, but at the very least be reusable across Manufacturing-X.
+
+#### Support for credential services independent of where they are hosted
+
+Credential services in future releases may be hosted by various parties (e.g. operating company, ESP, dataspace member).
+Therefor, the issuer service must not rely on the credential service being hosted by any specific entity.
+
+#### Be open for extension
+
+The Tractus-X architecture must be able to support potential new protocols and new credential types in the future without requiring extensive refactoring of the existing code base.
+
 ## Possible approaches
 
 Theoretically, it would be possible to continue development of the `ssi-credential-issuer` component until all of the aforementioned drawbacks are addressed.
