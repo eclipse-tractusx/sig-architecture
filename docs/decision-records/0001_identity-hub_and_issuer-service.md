@@ -59,23 +59,45 @@ The Tractus-X architecture must be able to support potential new protocols and n
 
 ## Possible approaches
 
-Theoretically, it would be possible to continue development of the `ssi-credential-issuer` component until all of the aforementioned drawbacks are addressed.
-However, doing so would amount to an almost complete rewrite of the application due to significant architectural differences, while additionally suffering from the following drawbacks:
+Regarding the credential service, the viable option is creating a Tractus-X distribution of the [Eclipse EDC IdentityHub](https://github.com/eclipse-edc/IdentityHub), which is an open-source Eclipse project of a credential service implementing the DCP protocol.
+For the issuer service, there are two options:
 
-- duplicate all development and testing efforts around DCP that are _already implemented upstream,_ specifically:
-  - JSON-LD algorithms (Note that this has nothing to do with the proof type of credentials, JSON-LD is simply required by the DCP endpoints.)
+- continue development on the current [ssi-credential-issuer](https://github.com/eclipse-tractusx/ssi-credential-issuer)
+- replace the current [ssi-credential-issuer](https://github.com/eclipse-tractusx/ssi-credential-issuer) by a Tractus-X distribution of the [Eclipse EDC Issuer Service](https://github.com/eclipse-edc/IdentityHub) (currently still in the same repository as the Eclipse EDC Identity Hub)
+
+### Option 1: Continue development on the current [ssi-credential-issuer](https://github.com/eclipse-tractusx/ssi-credential-issuer)
+
+#### Pros
+
+- build on existing code base
+- already integrated with portal backend
+
+#### Cons
+
+- delegation of features (signing and revoking VCs, DID and key management) to a proprietary credential service instance
+- not open for extension to additional credential types or schemas without a code-level change and a redeployment (causing a service disruption)
+- reliance on a central IdP (Keycloak) for issuing credentials
+- not compliant with DCP issuance
+- security concerns (client VCs are stored)
+
+### Option 2: Introduce a Tractus-X distribution of the [Eclipse EDC Issuer Service](https://github.com/eclipse-edc/IdentityHub)
+
+#### Pros
+
+- supports all features listed in the [functional requirements](#functional) above without delegating their execution to external services
+- introducing a Tractus-X distribution of an 
+- it is open for extension to other protocols and credential schemas
+- make use of the following features which are already implemented in the EDC libraries
+  - JSON-LD algorithms
   - cryptographic utilities, keys, signatures
   - all model classes, support for VC DataModel 1.1 _and_ 2.0
   - credential status list services
   - a generic credential generation framework
-- devise, implement and test a complete extensibility framework
-- implement, test, and maintain an admin API to be consumed by portal
 
-Given the development and maintenance efforts that would be necessary, refactoring the `ssi-credential-issuer` is not a viable alternative.
+#### Cons
 
-## Proposed decision
-
-Add two new repositories (related PRs [tractusx-identityhub](https://github.com/eclipse-tractusx/.eclipsefdn/pull/117) and [tractusx-issuerservice](https://github.com/eclipse-tractusx/.eclipsefdn/pull/118)) for Tractus-X distributions of the [Eclipse EDC IdentityHub and IssuerService](https://github.com/eclipse-edc/IdentityHub):
+- adds an additional dependency to the upstream eclipse-edc project
+- requires significant integration work on the portal backend
 
 ## Decision
 
