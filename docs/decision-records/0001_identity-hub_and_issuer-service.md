@@ -77,24 +77,31 @@ Given the development and maintenance efforts that would be necessary, refactori
 
 Add two new repositories (related PRs [tractusx-identityhub](https://github.com/eclipse-tractusx/.eclipsefdn/pull/117) and [tractusx-issuerservice](https://github.com/eclipse-tractusx/.eclipsefdn/pull/118)) for Tractus-X distributions of the [Eclipse EDC IdentityHub and IssuerService](https://github.com/eclipse-edc/IdentityHub):
 
+## Decision
+
+A Tractus-X distribution of the [Eclipse EDC IdentityHub](https://github.com/eclipse-edc/IdentityHub) is introduced as an open-source decentralised credential service for the Tractus-X architecture.
+A Tractus-X distribution fo the [Eclipse EDC Issuer Service](https://github.com/eclipse-edc/IdentityHub) replaces the current [ssi-credential-issuer](https://github.com/eclipse-tractusx/ssi-credential-issuer) as the implementation of the Tractus-X issuer.
+
+### Rationale
+[//]: # (Why is this decision taken)
+
+- continuing development on the [ssi-credential-issuer](https://github.com/eclipse-tractusx/ssi-credential-issuer) until all requirements listed above are met involves an amount of work essentially equivalent to a rewrite from scratch 
+- introducing Tractus-X distributions of upstream dataspace-agnostic projects is essential for interoperability with other dataspaces
+- using components from upstream projects as standard dependencies in Tractus-X distributions reduces development, testing, and maintenance effort within Tractus-X
+
+### Actions
+[//]: # (What direct next steps should be taken because of this decision?)
+
+Add two new repositories (related PRs [tractusx-identityhub](https://github.com/eclipse-tractusx/.eclipsefdn/pull/117) and [tractusx-issuerservice](https://github.com/eclipse-tractusx/.eclipsefdn/pull/118)) for Tractus-X distributions of the [Eclipse EDC IdentityHub and IssuerService](https://github.com/eclipse-edc/IdentityHub):
+
 - `tractusx-identityhub`
 - `tractusx-issuerservice`
 
-The relevant components from upstream developments will be used as standard dependencies in the Tractus-X distributions, which reduces necessary efforts concerning development, testing and maintenance significantly.
-From release 25.09 onwards, the current [ssi-credential-issuer](https://github.com/eclipse-tractusx/ssi-credential-issuer) will no longer be needed in the Catena-X architecture and will therefore no longer need to be maintained.
+Use the relevant components from upstream developments as standard dependencies in the Tractus-X distributions.
 
 Responsible committers for the new repositories as of now are Boris Rizov (@borisrizov-zf) and Rafael Magalhães (@rafaelmag110).
 
-## Rationale
+### Implications
+[//]: # (What happens as a direct consequence of this decision?)
 
-Going forward, the Tractus-X IdentityHub distribution (based on [EDC IdentityHub](https://github.com/eclipse-edc/IdentityHub)) will serve as the open-source basis for credential services ("wallets") in Tractus-X.
-In the same manner, the Tractus-X Issuer Service will replace the current [ssi-credential-issuer](https://github.com/eclipse-tractusx/ssi-credential-issuer) component.
-Therefore, Tractus-X distributions of these upstream components are needed, which will be developed and maintained in the aforementioned Tractus-X repositories.
-
-The current [SSI Credential Issuer](https://github.com/eclipse-tractusx/ssi-credential-issuer) has several drawbacks:
-
-- delegation of basic features to a proprietary wallet instance such as creating, signing and revoking verifiable credentials, DID document management and key management.
-- adding additional credential types or schemas requires a code-level change and a redeployment (service disruption)
-- reliance on central IdP (Keycloak) for issuing credentials
-- security concerns (client credentials are stored)
-- not compliant with DCP (Issuance)
+From release 25.09 onwards, the current [ssi-credential-issuer](https://github.com/eclipse-tractusx/ssi-credential-issuer) will no longer be needed in the Catena-X architecture and will therefore no longer need to be maintained.
