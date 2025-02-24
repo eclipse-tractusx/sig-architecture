@@ -86,7 +86,6 @@ For the issuer service, there are two options:
 #### Pros
 
 - supports all features listed in the [functional requirements](#functional) above without delegating their execution to external services
-- introducing a Tractus-X distribution of an 
 - it is open for extension to other protocols and credential schemas
 - make use of the following features which are already implemented in the EDC libraries
   - JSON-LD algorithms
