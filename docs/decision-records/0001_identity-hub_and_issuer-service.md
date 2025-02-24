@@ -122,6 +122,6 @@ Use the relevant components from upstream developments as standard dependencies 
 
 Responsible committers for the new repositories as of now are Boris Rizov (@borisrizov-zf) and Rafael Magalhães (@rafaelmag110).
 
-### Implications
+### Consequences
 
 From release 25.09 onwards, the current [ssi-credential-issuer](https://github.com/eclipse-tractusx/ssi-credential-issuer) will no longer be needed in the Catena-X architecture and will therefore no longer need to be maintained.
