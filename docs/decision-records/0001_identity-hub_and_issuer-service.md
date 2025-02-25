@@ -57,6 +57,7 @@ Therefor, the issuer service must not rely on the credential service being hoste
 #### Be open for extension
 
 The Tractus-X architecture must be able to support potential new protocols and new credential types in the future without requiring extensive refactoring of the existing code base.
+Adding new credential types should be possible without requiring code-level changes.
 
 #### Compatibility with SAP DIV
 
@@ -82,7 +83,7 @@ For the issuer service, there are two options:
 #### Cons
 
 - delegation of features (signing and revoking VCs, DID and key management) to a proprietary credential service instance
-- not open for extension to additional credential types or schemas without a code-level change and a redeployment (causing a service disruption)
+- introducing new credential types or schemas requires code-level changes
 - reliance on a central IdP (Keycloak) for issuing credentials
 - not compliant with DCP issuance
 - security concerns (client VCs are stored)
@@ -92,7 +93,8 @@ For the issuer service, there are two options:
 #### Pros
 
 - supports all features listed in the [functional requirements](#functional) above without delegating their execution to external services
-- it is open for extension to other protocols and credential schemas
+- adding new credential schemas does not require code-level changes
+- open for extension to other protocols
 - make use of the following features which are already implemented in the EDC libraries
   - JSON-LD algorithms
   - cryptographic utilities, keys, signatures
