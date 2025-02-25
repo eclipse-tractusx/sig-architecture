@@ -58,6 +58,11 @@ Therefor, the issuer service must not rely on the credential service being hoste
 
 The Tractus-X architecture must be able to support potential new protocols and new credential types in the future without requiring extensive refactoring of the existing code base.
 
+#### Compatibility with SAP DIV
+
+It is required that the issuer service and SAP DIV be compatible.
+This includes the issuance of new credentials as well as the reusability and reissuance of existing credentials.
+
 ## Possible approaches
 
 Regarding the credential service, the viable option is creating a Tractus-X distribution of the [Eclipse EDC IdentityHub](https://github.com/eclipse-edc/IdentityHub), which is an open-source Eclipse project of a credential service implementing the DCP protocol.
@@ -72,6 +77,7 @@ For the issuer service, there are two options:
 
 - build on existing code base
 - already integrated with portal backend
+- compatibility with SAP DIV present
 
 #### Cons
 
@@ -98,6 +104,7 @@ For the issuer service, there are two options:
 
 - adds an additional dependency to the upstream eclipse-edc project
 - requires significant integration work on the portal backend
+- requires SAP DIV to support the DCP issuance flow
 
 ## Decision
 
