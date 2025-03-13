@@ -35,7 +35,8 @@ This scalability, however, is important for [solution 1 - operator offers wallet
 
 ## Evaluation criteria
 
-{{ list all criteria based on which the decision will be taken; use subsections or bullet points depending on your needs }}
+- regular member companies must be able to become issuers without running a separate service
+- the tractusx-identityhub should not become unnecessarily resource-intensive
 
 ## Possible solutions
 
