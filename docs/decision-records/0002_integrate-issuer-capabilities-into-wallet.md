@@ -42,9 +42,10 @@ This scalability, however, is important for [solution 1 - operator offers wallet
 
 {{ briefly summarise all possible reasonable approaches to solving the problem }}
 
-### Solution 1: {{ title summarising solution 1 }}
+### Solution 1: Integrate issuer capabilities into the tractusx-identityhub.
 
-{{ evaluate the solution based on the evaluation criteria from the previous section; include additional pros and cons where appropriate; repeat for every solution }}
+Issuer capabilities will be added to the tractusx-identityhub, such that it covers features for issuers, holders, and verifiers in a single service.
+The distribution will be modularised in such a way that the issuer capabilities can be included if need be and excluded otherwise.
 
 ## Decision: {{ title summarising solution }}
 
