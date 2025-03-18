@@ -20,8 +20,9 @@ Source URL: https://github.com/eclipse-tractusx/sig-architecture
 #######################################################################
 -->
 
-<!-- Please make sure the title is aligned with the file name -->
-# Decision Record: {{ short title representing decision }}
+<!-- File name must be aligned with title. -->
+
+# {{ID}} Decision Record: {{ short title representing decision }}
 
 ## Metadata
 
