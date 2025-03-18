@@ -23,18 +23,9 @@ SPDX-License-Identifier: CC-BY-4.0
 
 ## Metadata
 
-|**Date**|
-|-|
-| <!-- e.g. 10-02-2025 --> |
-
-|**Objective**|
-|-|
-| <!-- e.g. Reduce complexity, Increase Performance --> |
-
-|**Dependencies/Target Group**|
-|-|
-| <!-- e.g. Eclipse Dataspace Connector, Any Tractus-X Consumer Application (DPP, DCM, IRS, PURIS, etc) --> |
-
+* Date: YYYY-MM-DD
+* Dependencies: {{ list dependencies }}
+* Target group: {{ list target group(s) }}
 
 ## Problem statement
 
