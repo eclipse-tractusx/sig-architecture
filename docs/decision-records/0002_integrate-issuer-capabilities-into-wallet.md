@@ -23,7 +23,7 @@ SPDX-License-Identifier: CC-BY-4.0
 ## Problem statement
 
 In the current Tractus-X architecture, the wallet ([tractusx-identityhub](https://github.com/eclipse-tractusx/tractusx-identityhub)) covers holder and verifier capabilities, but issuer capabilities are covered by a separate service ([tractusx-issuerservice](https://github.com/eclipse-tractusx/tractusx-issuerservice)).
-This separation works well at the present time, where only the CSP is an issuer of VCs.
+This separation works well at the present time, where only the Core Service Provider (CSP) is an issuer of verifiable credentials (VCs).
 
 However, in the mid- to long-term future, an increasing number of use cases will require regular member companies to also become issuers.
 The current separation of wallet vs issuer service would require all such member companies to run two separate services.
