@@ -15,6 +15,8 @@ https://creativecommons.org/licenses/by/4.0/legalcode.
 
 SPDX-License-Identifier: CC-BY-4.0
 
+Source URL: https://github.com/eclipse-tractusx/sig-architecture
+
 #######################################################################
 -->
 
