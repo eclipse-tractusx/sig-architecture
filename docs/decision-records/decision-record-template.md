@@ -18,7 +18,23 @@ SPDX-License-Identifier: CC-BY-4.0
 #######################################################################
 -->
 
-# Decision Record: {{ title representing decision }}
+<!-- Please make sure the title is aligned with the file name -->
+# Decision Record: {{ short title representing decision }}
+
+## Metadata
+
+|**Date**|
+|-|
+| <!-- e.g. 10-02-2025 --> |
+
+|**Objective**|
+|-|
+| <!-- e.g. Reduce complexity, Increase Performance --> |
+
+|**Dependencies/Target Group**|
+|-|
+| <!-- e.g. Eclipse Dataspace Connector, Any Tractus-X Consumer Application (DPP, DCM, IRS, PURIS, etc) --> |
+
 
 ## Problem statement
 
@@ -49,3 +65,12 @@ SPDX-License-Identifier: CC-BY-4.0
 ### Consequences
 
 {{ list all indirect implications of the decision, e.g. deprecation of a component }}
+
+## NOTICE
+
+This work is licensed under the [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/legalcode).
+
+- SPDX-License-Identifier: CC-BY-4.0
+- SPDX-FileCopyrightText: 2025 Contributors to the Eclipse Foundation
+- Source URL: https://github.com/eclipse-tractusx/sig-architecture
+
