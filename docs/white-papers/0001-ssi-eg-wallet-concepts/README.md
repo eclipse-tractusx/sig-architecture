@@ -22,6 +22,8 @@ Source URL: https://github.com/eclipse-tractusx/sig-architecture
 
 # Multiple wallet providers and Bring Your Own Wallet for the Catena-X dataspace
 
+This white paper has been created by the Catena-X SSI Expert Group.
+
 <!-- TOC -->
 * [Introduction](#introduction)
 * [Past wallet solutions in Catena-X](#past-wallet-solutions-in-catena-x)
