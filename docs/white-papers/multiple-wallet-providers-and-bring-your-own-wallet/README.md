@@ -3,7 +3,12 @@
 
 Tractus-X - Special Interest Group (SIG) Architecture
 
-Copyright (c) 2025 Bayerische Motoren Werke AG, CGI Deutschland B.V. & Co. KG, Cofinity-X GmbH, DENSO Europe, Metaform Systems Inc., SAP Deutschland SE & Co. KG
+Copyright (c) 2025 Contributors to the Eclipse Foundation
+Copyright (c) 2025 Bayerische Motoren Werke AG
+Copyright (c) 2025 CGI Deutschland B.V. & Co. KG
+Copyright (c) 2025 Cofinity-X GmbH, DENSO Europe
+Copyright (c) 2025 Metaform Systems Inc.
+Copyright (c) 2025 SAP Deutschland SE & Co. KG
 
 See the NOTICE file(s) distributed with this work for additional
 information regarding copyright ownership.
@@ -798,3 +803,17 @@ No implications. The move of the DID from one wallet to another one should only 
 
 * Related concept: [Moving to DID-based Identifiers in the Catena-X Protocol Layer](https://github.com/catenax-eV/cx-ex-dataspace-connectivity/blob/main/docs/bpn-did-resolution/moving-to-DID-identifiers.md#moving-to-did-based-identifiers-in-the-catena-x-protocol-layer)
 * Related issue: Deprecation StatusList2021, BitStringStatusList current W3C standard
+
+## NOTICE
+
+This work is licensed under the [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/legalcode).
+
+- SPDX-License-Identifier: CC-BY-4.0
+- SPDX-FileCopyrightText: 2025 Contributors to the Eclipse Foundation
+- SPDX-FileCopyrightText: 2025 Bayerische Motoren Werke AG
+- SPDX-FileCopyrightText: 2025 CGI Deutschland B.V. & Co. KG
+- SPDX-FileCopyrightText: 2025 Cofinity-X GmbH
+- SPDX-FileCopyrightText: 2025 DENSO Europe
+- SPDX-FileCopyrightText: 2025 Metaform Systems Inc.
+- Source URL: https://github.com/eclipse-tractusx/sig-architecture
+
