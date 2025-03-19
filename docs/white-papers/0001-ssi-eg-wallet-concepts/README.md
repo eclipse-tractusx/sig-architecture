@@ -3,7 +3,7 @@
 
 Tractus-X - Special Interest Group (SIG) Architecture
 
-Copyright (c) 2025 Contributors to the Eclipse Foundation
+Copyright (c) 2025 Bayerische Motoren Werke AG, CGI Deutschland B.V. & Co. KG, Cofinity-X GmbH, DENSO Europe, Metaform Systems Inc., SAP Deutschland SE & Co. KG
 
 See the NOTICE file(s) distributed with this work for additional
 information regarding copyright ownership.
