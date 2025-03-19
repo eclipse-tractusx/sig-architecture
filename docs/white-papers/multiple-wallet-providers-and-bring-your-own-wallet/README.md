@@ -100,7 +100,7 @@ By promoting these actions, Catena-X ensures a secure, interoperable, and scalab
 
 ### Pre-Jupiter: Centralised multi-tenant wallet
 
-![pre-jupiter architecture](media/0001-pre-jupiter-architecture.png)
+![pre-jupiter architecture](media/pre-jupiter-architecture.png)
 
 <details>
 <summary>Plantuml code</summary>
@@ -130,7 +130,7 @@ It was a Core Service B, so there was one instance hosted by the Core Service Pr
 
 ### Jupiter: Centralised use of a decentralised wallet
 
-![jupiter architecture](media/0001-jupiter-architecture.png)
+![jupiter architecture](media/jupiter-architecture.png)
 
 <details>
 <summary>Plantuml code</summary>
@@ -331,7 +331,7 @@ sequenceDiagram
 
 #### Issuance
 
-![issuance sequence diagram](media/0001-issuance.png)
+![issuance sequence diagram](media/issuance.png)
 
 <details>
 <summary>Plantuml code</summary>
@@ -376,7 +376,7 @@ If all required attributes for the requested VC are present, the Issuer Service 
 
 #### Re-issuance
 
-![reissuance sequence diagram](media/0001-reissuance.png)
+![reissuance sequence diagram](media/reissuance.png)
 
 <details>
 <summary>Plantuml code</summary>
@@ -419,7 +419,7 @@ We make the assumption that at the end of this flow, the organization has
 
 A high-level sequence of this flow is shown below for completeness' sake.
 
-![initial onboarding sequence diagram](media/0001-initial-onboarding.png)
+![initial onboarding sequence diagram](media/initial-onboarding.png)
 
 <details>
 <summary>Plantuml code</summary>
@@ -479,7 +479,7 @@ These three cases will need to be treated separately in the initial onboarding, 
 
 ###### Hosted by member
 
-![infrastructure setup hosted by member sequence diagram](media/0001-infrastructure-setup-hosted-by-member.png)
+![infrastructure setup hosted by member sequence diagram](media/infrastructure-setup-hosted-by-member.png)
 
 <details>
 <summary>Plantuml code</summary>
@@ -517,7 +517,7 @@ P -> IS: Trigger issuance of Membership/BPN VCs
 
 ###### Hosted for member
 
-![infrastructure setup hosted for member sequence diagram](media/0001-infrastructure-setup-hosted-for-member.png)
+![infrastructure setup hosted for member sequence diagram](media/infrastructure-setup-hosted-for-member.png)
 
 <details>
 <summary>Plantuml code</summary>
@@ -564,7 +564,7 @@ An offboarded company is indicated by a special “offboarded” attribute.
 During the offboarding process, the portal will add this attribute and then revoke all active VCs the now offboarded company holds.
 This attribute will cause any and all issuance requests to fail.
 
-![offboarding sequence diagram](media/0001-offboarding.png)
+![offboarding sequence diagram](media/offboarding.png)
 
 <details>
 <summary>Plantuml code</summary>
@@ -598,7 +598,7 @@ After key rotation, VCs signed with the previous key pair may still be active.
 Therefore, the previous public key is kept in the did document until all VCs signed with the old key pair are expired.
 I.e. there may be multiple public keys in the did document at the same time.
 
-![issuer key rotation sequence diagram](media/0001-issuer-key-rotation.png)
+![issuer key rotation sequence diagram](media/issuer-key-rotation.png)
 
 <details>
 <summary>Plantuml code</summary>
@@ -624,7 +624,7 @@ IS -> DID: Remove old public key
 
 > Definition: A third party has gained unauthorized access to a private key.
 
-![compromised issuer key sequence diagram](media/0001-compromised-issuer-key.png)
+![compromised issuer key sequence diagram](media/compromised-issuer-key.png)
 
 <details>
 <summary>Plantuml code</summary>
@@ -733,7 +733,7 @@ sequenceDiagram
 
 #### Credential Revocation
 
-![revocation sequence diagram](media/0001-revocation.png)
+![revocation sequence diagram](media/revocation.png)
 
 <details>
 <summary>Plantuml code</summary>
